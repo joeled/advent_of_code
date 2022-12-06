@@ -23,12 +23,9 @@ def do_move(move):
     split_move = move.split(" ")
     number_to_move, start, end = [split_move[i] for i in [1, 3, 5]]
 
-    num_moved = 0
-
     for i in range(0, int(number_to_move)):
         crate = stacks[int(start)-1].pop(0)
-        stacks[int(end)-1].insert(num_moved, crate)
-        num_moved += 1
+        stacks[int(end)-1].insert(0, crate)
 
 
 if __name__ == "__main__":
