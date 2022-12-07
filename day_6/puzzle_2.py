@@ -1,3 +1,5 @@
+import time
+
 i, j = 0, 13
 line = ''
 currWindow = {}
@@ -21,6 +23,7 @@ def move_pointers():
 
 
 if __name__ == "__main__":
+    t0 = time.time()
 
     with open('inputs/puzzle_1.txt') as f:
         line = f.readline()
@@ -33,3 +36,7 @@ if __name__ == "__main__":
             break
         else:
             move_pointers()
+
+    t1 = time.time()
+
+    print(str((t1-t0)*1000) + "ms")
