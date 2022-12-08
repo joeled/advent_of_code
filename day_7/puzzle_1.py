@@ -25,7 +25,7 @@ def process_command(line):
 def process_file_or_dir(line):
     line_split = line.split(" ")
 
-    dir_top_level_sum = 0
+    dir_top_level_sum = dir_top_level_sizes.get(curr_full_path, 0)
 
     if line_split[0] != 'dir':
         dir_top_level_sum += int(line_split[0])
