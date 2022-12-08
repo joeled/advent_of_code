@@ -2,7 +2,7 @@ curr_full_path = ""
 dir_top_level_sizes = {}
 dir_parents = {}
 answer_dir_sum = 0
-dir_names = ["/"]
+dir_names = set("/")
 
 
 def process_command(line):
@@ -19,10 +19,7 @@ def process_command(line):
         else:
             curr_dir = command_split[2]
             curr_full_path += curr_dir + "/"
-            dir_names.append("/"+curr_dir+"/")
-    else:
-        # ls - Initialize dir size
-        dir_top_level_sizes.update({curr_full_path: 0})
+            dir_names.add(curr_full_path)
 
 
 def process_file_or_dir(line):
@@ -57,9 +54,9 @@ def get_answer():
 
     for dir_name in dir_names:
         dir_sum = 0
-        for dir_size in dir_top_level_sizes:
-            if dir_name in dir_size:
-                dir_sum += dir_top_level_sizes.get(dir_size)
+        for dir_name_two in dir_top_level_sizes:
+            if dir_name_two.startswith(dir_name):
+                dir_sum += dir_top_level_sizes.get(dir_name_two)
         if dir_sum <= 100000:
             answer_dir_sum += dir_sum
 
