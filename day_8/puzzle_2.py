@@ -36,22 +36,21 @@ def process_right_bottom():
 
 
 def calculate_score(i, j):
-    top_score = 0
-    left_score = 0
-    right_score = 0
-    bottom_score = 0
+    top_score = 1
+    left_score = 1
+    right_score = 1
+    bottom_score = 1
 
     if max_top[i][j] < trees[i][j]:
-        top_score += i
+        top_score = i
     else:
-        top_score = 1
-        temp_i = i-1
+        temp_i = i - 1
         while temp_i >= 0 and trees[temp_i][j] < trees[i][j]:
             top_score += 1
             temp_i -= 1
 
     if max_left[i][j] < trees[i][j]:
-        left_score += j
+        left_score = j
     else:
         temp_j = j - 1
         while temp_j >= 0 and trees[i][temp_j] < trees[i][j]:
@@ -59,20 +58,19 @@ def calculate_score(i, j):
             temp_j -= 1
 
     if max_right[i][j] < trees[i][j]:
-        right_score += len(trees[0]) - j - 1
+        right_score = len(trees[0]) - j - 1
     else:
         temp_j = j - 1
-        while temp_j <= len(trees[0])-1 and trees[i][temp_j] < trees[i][j]:
-            left_score += 1
+        while temp_j <= len(trees[0]) - 1 and trees[i][temp_j] < trees[i][j]:
+            right_score += 1
             temp_j += 1
 
     if max_bottom[i][j] < trees[i][j]:
-        bottom_score += len(trees) - i - 1
+        bottom_score = len(trees) - i - 1
     else:
-        bottom_score = 1
         temp_i = i + 1
-        while temp_i <= len(trees)-1 and trees[temp_i][j] < trees[i][j]:
-            top_score += 1
+        while temp_i <= len(trees) - 1 and trees[temp_i][j] < trees[i][j]:
+            bottom_score += 1
             temp_i += 1
 
     score = top_score * left_score * right_score * bottom_score
