@@ -1,5 +1,5 @@
 grid = []
-start = []
+possible_starts = []
 end = []
 visited = set()
 
@@ -24,8 +24,11 @@ def add_neighbors_to_queue(element, queue):
     return queue
 
 
-def bfs():
-    queue = [start]
+def bfs(possible_start):
+    global visited
+
+    visited = set()
+    queue = [possible_start]
 
     iteration = 0
     while len(queue) > 0:
@@ -35,17 +38,18 @@ def bfs():
             element = queue.pop(0)
             visited.add(str(element[0]) + " " + str(element[1]))
             if element[0] == end[0] and element[1] == end[1]:
-                print(iteration)
-                return
+                return iteration
             else:
                 add_neighbors_to_queue(element, queue)
         iteration += 1
 
+    return 10000
+
 
 def parse_square(row, col, square):
     global start, end
-    if square == 'S':
-        start = [row, col]
+    if square == 'S' or square == 'a':
+        possible_starts.append([row, col])
         return ord('a')
     elif square == 'E':
         end = [row, col]
@@ -63,7 +67,13 @@ def process_input():
         line = line.replace("\n", "")
         grid.append([parse_square(row, col, square) for col, square in enumerate(line)])
 
-    bfs()
+    min_path = 10000
+
+    for possible_start in possible_starts:
+        path = bfs(possible_start)
+        min_path = min(min_path, path)
+
+    print(min_path)
 
 
 if __name__ == "__main__":
