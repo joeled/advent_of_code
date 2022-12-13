@@ -6,7 +6,7 @@ def parse_packet(packet_str):
     return json.loads(packet_str)
 
 
-# Returns 1 if left smaller, 0 if left and right are equal and -1 if right is smaller
+# Returns 1 if left bigger, 0 if left and right are equal and -1 if right is bigger
 def compare(left, right):
     left_len = len(left)
     right_len = len(right)
