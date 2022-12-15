@@ -1,3 +1,5 @@
+import time
+
 def generate_unit_of_sand(grid, offset):
     sand_idx = [0, 500 - offset]
 
@@ -77,11 +79,14 @@ def process_input():
         generate_unit_of_sand(grid, offset)
         units_of_sand += 1
 
-    for row in grid:
-        print(row)
+    # for row in grid:
+    #     print(row)
 
-    print(units_of_sand)
+    # print(units_of_sand)
 
 
 if __name__ == "__main__":
+    start = time.time()
     process_input()
+    end = time.time()
+    print(end-start)
