@@ -70,9 +70,6 @@ def draw_fallen_rock(top_left, curr_rock):
 def push_gas(top_left, curr_rock, jet):
     global jet_count
 
-    # if curr_rock == 24:
-    #     print(jet)
-
     if jet == '<' and not touching(top_left, left_contact_points[curr_rock % 5], 0, -1):
         top_left[1] -= 1
     elif jet == '>' and not touching(top_left, right_contact_points[curr_rock % 5], 0, 1):
@@ -96,34 +93,13 @@ def drop_rock(curr_rock, jets):
 
     top_left = [0, 3]
 
-    # if curr_rock == 24:
-    #     draw_fallen_rock(top_left, curr_rock)
-    #     for row in cavern:
-    #         print(row)
-    #     print()
-    #     erase_fallen_rock(top_left, curr_rock)
-
     while True:
         top_left = push_gas(top_left, curr_rock, jets[jet_count % len(jets)])
-
-        # if curr_rock == 24:
-        #     draw_fallen_rock(top_left, curr_rock)
-        #     for row in cavern:
-        #         print(row)
-        #     print()
-        #     erase_fallen_rock(top_left, curr_rock)
 
         if not touching(top_left, downward_contact_points[curr_rock % 5], 1, 0):
             top_left[0] += 1
         else:
             break
-
-        # if curr_rock == 24:
-        #     draw_fallen_rock(top_left, curr_rock)
-        #     for row in cavern:
-        #         print(row)
-        #     print()
-        #     erase_fallen_rock(top_left, curr_rock)
 
     draw_fallen_rock(top_left, curr_rock)
     curr_highest = min(curr_highest, top_left[0])
@@ -131,24 +107,10 @@ def drop_rock(curr_rock, jets):
 
 def run_simulation(jets):
     rock = 0
-    while rock < 1000000000000:
+    while rock < 2022:
         drop_rock(rock, jets)
         grow_cavern(rock + 1)
-
-        # for row in cavern:
-        #     print(row)
-        # print()
-
-        # print(rock)
-        # print(int(heights[rock]))
-        # print(len(cavern) - curr_highest - 1)
-        #
-        # print()
-
         rock += 1
-
-        if rock % 100000 == 0:
-            print(rock)
 
     print(len(cavern) - curr_highest - 1)
 
