@@ -20,14 +20,14 @@ downward_contact_points = [
 ]
 left_contact_points = [
     [[0, 0]],
-    [[1, 0]],
-    [[2, 0]],
+    [[0, 1], [1, 0], [2, 1]],
+    [[0, 2], [1, 2], [2, 0]],
     [[0, 0], [1, 0], [2, 0], [3, 0]],
     [[0, 0], [1, 0]]
 ]
 right_contact_points = [
     [[0, 3]],
-    [[1, 2]],
+    [[0, 1], [1, 2], [2, 1]],
     [[0, 2], [1, 2], [2, 2]],
     [[0, 0], [1, 0], [2, 0], [3, 0]],
     [[0, 1], [1, 1]]
@@ -131,13 +131,13 @@ def drop_rock(curr_rock, jets):
 
 def run_simulation(jets):
     rock = 0
-    while rock < 12:
+    while rock < 1000000000000:
         drop_rock(rock, jets)
         grow_cavern(rock + 1)
 
-        for row in cavern:
-            print(row)
-        print()
+        # for row in cavern:
+        #     print(row)
+        # print()
 
         # print(rock)
         # print(int(heights[rock]))
@@ -147,7 +147,10 @@ def run_simulation(jets):
 
         rock += 1
 
-        print(len(cavern) - curr_highest - 1)
+        if rock % 100000 == 0:
+            print(rock)
+
+    print(len(cavern) - curr_highest - 1)
 
 
 def process_input():
